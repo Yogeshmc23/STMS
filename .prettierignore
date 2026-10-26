@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+server/public
+server/data
+server/outbox
+package-lock.json
+*.sql

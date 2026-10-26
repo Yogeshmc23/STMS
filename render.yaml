@@ -1,0 +1,22 @@
+# Render blueprint (DEPLOYMENT.md §3.3). Free tier has EPHEMERAL disk — SQLite resets on redeploy
+# unless you attach a persistent disk to the service in the Render dashboard.
+services:
+  - type: web
+    name: stms
+    runtime: node
+    plan: free
+    rootDir: /
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DB_PATH
+        value: /var/data/stms.sqlite # put on a persistent disk if attached
+      - key: TRUST_PROXY
+        value: '1'
+      # SMTP_HOST/PORT/USER/PASS + EMAIL_FROM: add in the dashboard to enable real email.

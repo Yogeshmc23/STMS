@@ -1,0 +1,426 @@
+/* ==========================================================================
+   STMS Design System — DESIGN.md §2–§4, §9
+   Tokens first (light + dark), then base element styles. Component classes
+   are added per phase; everything sources colors/spacing from these tokens
+   (AGENTS.md §4: no hardcoded hex/px outside this file).
+   ========================================================================== */
+
+/* ---------- Tokens: light theme (default) ---------- */
+:root {
+  color-scheme: light dark;
+
+  /* Brand */
+  --brand: #4f46e5;
+  --brand-hover: #4338ca;
+  --brand-soft: #eef2ff;
+  --brand-text: #3730a3;
+
+  /* Surfaces */
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --border: #e2e8f0;
+
+  /* Text */
+  --text: #0f172a;
+  --text-muted: #64748b;
+
+  /* Semantic */
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+  --danger-text: #b91c1c;
+  --warning: #d97706;
+  --warning-soft: #fffbeb;
+  --warning-text: #b45309;
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --success-text: #15803d;
+
+  /* Priority (DESIGN.md §2 — dot + label, never color alone) */
+  --priority-high: #dc2626;
+  --priority-high-soft: #fef2f2;
+  --priority-high-text: #b91c1c;
+  --priority-medium: #d97706;
+  --priority-medium-soft: #fffbeb;
+  --priority-medium-text: #b45309;
+  --priority-low: #0891b2;
+  --priority-low-soft: #ecfeff;
+  --priority-low-text: #0e7490;
+
+  /* Task type accents */
+  --type-assignment: #4f46e5;
+  --type-project: #7c3aed;
+  --type-exam: #dc2626;
+  --type-study: #16a34a;
+  --type-other: #64748b;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Radius */
+  --radius-card: 12px;
+  --radius-control: 8px;
+  --radius-pill: 999px;
+  --radius-modal: 16px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-raised: 0 12px 32px rgb(15 23 42 / 0.16);
+
+  /* Z-index layers */
+  --z-nav: 10;
+  --z-dropdown: 20;
+  --z-sticky: 30;
+  --z-modal: 50;
+  --z-toast: 60;
+
+  /* Typography (system stack — zero network dependency) */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --content-max-width: 1200px;
+  --touch-target: 44px;
+}
+
+/* ---------- Tokens: dark theme ---------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --brand: #6366f1;
+  --brand-hover: #818cf8;
+  --brand-soft: #1e1b4b;
+  --brand-text: #c7d2fe;
+
+  --bg: #0b1220;
+  --surface: #111a2e;
+  --surface-2: #1a2540;
+  --border: #263352;
+
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+
+  --danger: #f87171;
+  --danger-soft: #450a0a;
+  --danger-text: #fca5a5;
+  --warning: #fbbf24;
+  --warning-soft: #451a03;
+  --warning-text: #fcd34d;
+  --success: #4ade80;
+  --success-soft: #052e16;
+  --success-text: #86efac;
+
+  --priority-high: #f87171;
+  --priority-high-soft: #450a0a;
+  --priority-high-text: #fca5a5;
+  --priority-medium: #fbbf24;
+  --priority-medium-soft: #451a03;
+  --priority-medium-text: #fcd34d;
+  --priority-low: #22d3ee;
+  --priority-low-soft: #083344;
+  --priority-low-text: #67e8f9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --brand: #6366f1;
+    --brand-hover: #818cf8;
+    --brand-soft: #1e1b4b;
+    --brand-text: #c7d2fe;
+
+    --bg: #0b1220;
+    --surface: #111a2e;
+    --surface-2: #1a2540;
+    --border: #263352;
+
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+
+    --danger: #f87171;
+    --danger-soft: #450a0a;
+    --danger-text: #fca5a5;
+    --warning: #fbbf24;
+    --warning-soft: #451a03;
+    --warning-text: #fcd34d;
+    --success: #4ade80;
+    --success-soft: #052e16;
+    --success-text: #86efac;
+
+    --priority-high: #f87171;
+    --priority-high-soft: #450a0a;
+    --priority-high-text: #fca5a5;
+    --priority-medium: #fbbf24;
+    --priority-medium-soft: #451a03;
+    --priority-medium-text: #fcd34d;
+    --priority-low: #22d3ee;
+    --priority-low-soft: #083344;
+    --priority-low-text: #67e8f9;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Accessibility: visible focus everywhere (DESIGN.md §9) */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Primitive components (foundation for all phases) ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--brand);
+  color: #ffffff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--brand-hover);
+}
+.btn-secondary {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.btn-danger {
+  background: var(--danger);
+  color: #ffffff;
+}
+.btn-danger:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.btn-small {
+  min-height: 32px;
+  padding: var(--space-1) var(--space-3);
+  font-size: 12.5px;
+}
+
+.input {
+  width: 100%;
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  color: var(--text);
+  transition: border-color 150ms ease;
+}
+.input::placeholder {
+  color: var(--text-muted);
+}
+.input:focus {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+.input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+textarea.input {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.field-error {
+  margin-top: var(--space-1);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--danger-text);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+.text-danger {
+  color: var(--danger-text);
+}
+.text-success {
+  color: var(--success-text);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.badge-high {
+  background: var(--priority-high-soft);
+  color: var(--priority-high-text);
+}
+.badge-medium {
+  background: var(--priority-medium-soft);
+  color: var(--priority-medium-text);
+}
+.badge-low {
+  background: var(--priority-low-soft);
+  color: var(--priority-low-text);
+}
+
+/* Skeleton loading (DESIGN.md §7) */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  border-radius: var(--radius-control);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+:root[data-theme='dark'] .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+}
+.skeleton-line {
+  display: inline-block;
+  width: 120px;
+  height: 14px;
+  vertical-align: middle;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Phase 0 scaffold page */
+.scaffold-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+}
+.scaffold-card {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}

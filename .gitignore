@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+server/public/
+*.tsbuildinfo
+
+# Environment & secrets (never commit; .env.example is the template)
+.env
+.env.*
+!.env.example
+
+# Database files & runtime data
+server/data/
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# Dev email outbox (temporary scaffolding, see ARCHITECTURE.md §6)
+server/outbox/
+
+# Tests & tooling
+coverage/
+*.log
+
+# OS
+.DS_Store
