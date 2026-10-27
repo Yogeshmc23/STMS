@@ -4,14 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="robots" content="index, follow" />
     <meta
       name="description"
-      content="Student Task Manager — organize assignments, projects, exams and deadlines; never miss due date again."
+      content="Student Task Manager - organize assignments, projects, exams and deadlines; never miss a due date again."
     />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Student Task Manager" />
+    <meta property="og:description" content="Organize assignments, projects, exams and deadlines; never miss a due date again." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <title>Student Task Manager</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>You need to enable JavaScript to use Student Task Manager.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
